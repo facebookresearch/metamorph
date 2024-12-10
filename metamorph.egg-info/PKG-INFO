@@ -1,0 +1,100 @@
+Metadata-Version: 2.1
+Name: metamorph
+Version: 1.0.0
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: Apache Software License
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: torch==2.2.0
+Requires-Dist: torchvision==0.17.0
+Requires-Dist: transformers==4.37.2
+Requires-Dist: tokenizers==0.15.1
+Requires-Dist: sentencepiece==0.1.99
+Requires-Dist: shortuuid
+Requires-Dist: accelerate==0.21.0
+Requires-Dist: peft
+Requires-Dist: bitsandbytes
+Requires-Dist: pydantic
+Requires-Dist: markdown2[all]
+Requires-Dist: numpy
+Requires-Dist: scikit-learn==1.2.2
+Requires-Dist: gradio==4.16.0
+Requires-Dist: gradio_client==0.8.1
+Requires-Dist: requests
+Requires-Dist: httpx==0.24.0
+Requires-Dist: uvicorn
+Requires-Dist: fastapi
+Requires-Dist: einops==0.6.1
+Requires-Dist: einops-exts==0.0.4
+Requires-Dist: timm==0.6.13
+Provides-Extra: train
+Requires-Dist: deepspeed==0.12.6; extra == "train"
+Requires-Dist: ninja; extra == "train"
+Requires-Dist: wandb; extra == "train"
+Provides-Extra: build
+Requires-Dist: build; extra == "build"
+Requires-Dist: twine; extra == "build"
+
+## Installation
+Create a conda environment and install current environment:
+```
+cd LLaVA
+conda env create -f jepa_environment.yml
+pip install -e .
+```
+## Training
+
+raining is primarily executed using the script `launch_scripts/train_mix.sh`. Ensure to adjust the number of nodes manually within the script:
+
+```sh
+#SBATCH --nodes=4                # Number of nodes
+```
+
+### Training Arguments
+
+Below are the key arguments used for training:
+
+- `--num_image_tokens`: Specifies the number of image tokens utilized for each image. The model interpolates the image features to the target number of image tokens. Ensure that `num_image_tokens` is a perfect square (e.g., 256, 576). The default is set to 256.
+
+- `--model_max_length`: Defines the context length used for training. A longer context length demands more computational resources. The default is set to 2048, but the code supports context lengths up to 8192.
+
+- `--vision_head_type`: Defines whether or not use a vision head on top of autoregressive model predicted representation. Default is None
+
+- `--nodes`: This is the number of nodes used in the training. Note, this will NOT change the number of nodes used, it is only here to calculate the batchsize. 
+
+- `--lr`: Learning rate for the model except the vision backbone. Default is set to 2.24e-5
+
+- `--vision_lr`: Learning rate for the vision model, it is set to 1/10 of the lr. Default is set to 2.24e-6
+
+- `--batch_size`: This is the batch size per GPU. So the global batch size is nodes * 8 * batch_size_per_GPU 
+
+- `--msg`: Optionnal Message you want to append to a run
+
+- `--dataset_size`: This specifies what data to run. Currently, all the important data mixture are names as mix_{}k.json. So we can specify the dataset_size
+
+- `--mm_projector_type`: This defines the connector between vision and language. Its default is linear, but we are transitioning to 'mlp2x_gelu' which is a 2-layer mlp with gelu
+
+- `--freeze_vision`: Whether or not to freeze vision backbone
+
+
+- `--vision_tower`: Vision Backnone, supported models are:
+[openai/clip-vit-large-patch14, openai/clip-vit-large-patch14-336, siglip/CLIP-ViT-SO400M-14-384]
+
+
+- `--use_vision_ar`: Whether or not the mdoel uses vision autoregressive prediction
+
+- `--tune_mm_mlp_adapter`: Is the model pretraining adapter
+
+
+
+## Potential Question and Answers
+We collected some potential questions we received from collegues and friends and here are the responses. 
+
+Q: If I don't have access to MetaCLIP curated data, is there any substitutes.  
+
+A: We used MetaCLIP data because it was the most accessible image-text pairs to us. Essentially, one can use other (open-source) image text pairs such as [CC12M](https://github.com/google-research-datasets/conceptual-12m) and [Datacomp](https://www.datacomp.ai/). In this work, we used at most 5 million image-text pairs for instruction tuning LLM and at most 15 million image-text pairs to finetune diffusion models. 
+
+Q: Why is the CFG level used in finetuning diffusion model so high (>0.7)?
+
+A:

@@ -1,0 +1,7 @@
+log/
+wandb/
+checkpoints/
+visualization/**/*
+!visualization/*.*
+*.pyc
+__pycache__/
