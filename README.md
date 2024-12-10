@@ -196,9 +196,9 @@ You can download and directly use them for your experiments.
 | LLaMA-3.1 8B       | 1536                 | 6.93e-5           | 1          | 4096           |
 
 To train with different batch sizes, use the following formula (from Cambrian-1) to adjust the learning rate:  
-\[
-\text{Optimal Learning Rate} = \text{Base Learning Rate} \times \sqrt{\frac{\text{Batch Size}}{\text{Base Batch Size}}}
-\]
+
+Optimal Learning Rate = Base Learning Rate * \sqrt{Batch Size / Base Batch Size}
+
 
 #### Multi-node SLURM Training
 
