@@ -43,7 +43,7 @@
 <br>
 
 
-> 🔥 **Core Discovery**: Visual generation triggeres *naturally* from understanding! With just 200K samples + co-training, LLMs can generate visual embeddings without extensive pretraining.
+> 🔥 **Core Discovery**: Visual generation capability *naturally* arises from understanding! With just 200K samples + co-training, LLMs can be taught to generate visual embeddings without extensive pretraining.
 
 ### Key Findings in One Shot:
 - 🚀 **Understanding <=> Generation**: Better VQA → Better Image Generation, and vice versa!
@@ -51,7 +51,7 @@
 - 🧠 **LLM Capability Transfer**: Generate rare concepts like "Chhogori" & solve visual puzzles
 - 🎯 **Minor Architectural Changes**: Simple instruction tuning morphs LLM into a unified model
 
-> *Fun fact: We choose MetaMorph as MetaMorphasis. Transforming LLM to Unified Models is just like MetaMorphasis :)*
+> *Fun fact: MetaMorph is inspired by the biological process of metamorphosis! Transforming a LLM to an Unified Model is just like transforming a caterpillar to a butterfly :)*
 
 ## Release
 - [12/10/24] 🔥 We released MetaMorph! We also release one 8B model and a finetuned visualizer, and GPU training scripts.
@@ -91,7 +91,7 @@ We provide a sample model loading and demo script in [`inference/demo.py`](infer
 
 
 ## Training Data
-MetaMoprh project uses mostly publicly available datasets for training:
+MetaMorph mostly uses publicly available datasets for training:
 <p align="center">
     <img src="images/metamorph_data.png" alt="MetaMorph-Data">
 </p>
