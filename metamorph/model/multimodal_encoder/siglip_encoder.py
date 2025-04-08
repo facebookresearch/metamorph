@@ -12,7 +12,6 @@ class ProcessorWrapper:
             "width": width,
         }
         self._transforms = transform
-        #print(transform)
         self.image_mean = image_mean
 
     @property
@@ -68,9 +67,6 @@ class SiglipVisionTower(nn.Module):
         self.normalize_vision = getattr(args, 'normalize_vision', False)
         self.apply_softmax = getattr(args, 'apply_softmax', False)
 
-        print("normalize_vision is:", self.normalize_vision)
-
-        # exit()
 
         self.codebook = 4096
 
@@ -87,11 +83,8 @@ class SiglipVisionTower(nn.Module):
             self.hidden_size = 1152
 
         if self.is_loaded:
-            #print(self.vision_tower)
             # Feature size
             feature_size = 1152
-            # Patch size
-            # patch_size = self.vision_tower.vision_model.embeddings.patch_embedding.kernel_size
 
             # Number of patches
             num_patches = 729
@@ -106,11 +99,10 @@ class SiglipVisionTower(nn.Module):
                 )
             elif self.image_token_reduction =="concat_interpolation":
                  self.hidden_size = 4* self.hidden_size
-        print("Let's go!") 
 
     def load_model(self, device_map=None):
         self.vision_model = "siglip"
-        print("Name is", self.vision_tower_name)
+
         model = AutoModel.from_pretrained("google/siglip-so400m-patch14-384")
         clip_processor = AutoProcessor.from_pretrained("google/siglip-so400m-patch14-384")
 
@@ -144,7 +136,6 @@ class SiglipVisionTower(nn.Module):
         return image_features
 
     def forward(self, images):
-        # print("Gradient Flow is set to:", not self.freeze_vision)
         with torch.set_grad_enabled(not self.freeze_vision):
 
             image_forward_outs = self.vision_tower(images.to(device=self.device, dtype=self.dtype), output_hidden_states=True)
@@ -152,7 +143,6 @@ class SiglipVisionTower(nn.Module):
 
             b, num_tokens, dim = image_features.shape
 
-            # print(image_features.shape)
             if num_tokens != self.image_token_len:
                 if self.image_token_len == -1:
                     image_features = torch.zeros((b, num_tokens, dim), device=image_features.device, dtype=image_features.dtype)
@@ -212,10 +202,9 @@ class SiglipVisionTower(nn.Module):
 
                 else:
                     raise NotImplementedError("Not Implemented!")
-            # print("Shape is", image_features.shape)
 
             if self.normalize_vision:
-                # print('I normalized vsision in vision encoder!!!!!')
+
                 image_features = F.normalize(image_features, p=2, dim=-1)
 
             if self.apply_softmax:

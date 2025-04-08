@@ -9,15 +9,11 @@
 
 
 
-<a href="" target="_blank">
+<a href="https://arxiv.org/abs/2412.14164" target="_blank">
     <img alt="arXiv" src="https://img.shields.io/badge/arXiv-MetaMorph-red?logo=arxiv" height="25" />
 </a>
 <a href="https://tsb0601.github.io/metamorph.github.io/" target="_blank">
-    <img alt="Website" src="https://img.shields.io/badge/🌎_Website-cambrian--mllm.github.io-blue.svg" height="25" />
-</a>
-<br>
-<a href="https://huggingface.co/collections/MetaMorphOrg/metamorph-models-6757d50d33de701f67db1d22" target="_blank">
-    <img alt="HF Model: MetaMorph" src="https://img.shields.io/badge/%F0%9F%A4%97%20_Model-MetaMorph-ffc107?color=ffc107&logoColor=white" height="25" />
+    <img alt="Website" src="https://img.shields.io/badge/🌎_Website-MetaMorph.github.io-blue.svg" height="25" />
 </a>
 
 
@@ -54,7 +50,7 @@
 > *Fun fact: MetaMorph is inspired by the biological process of metamorphosis! Transforming a LLM to an Unified Model is just like transforming a caterpillar to a butterfly :)*
 
 ## Release
-- [12/10/24] 🔥 We released MetaMorph! We also release one 8B model and a finetuned visualizer, and GPU training scripts.
+- [04/08/25] 🔥 We released MetaMorph! We also release GPU training scripts.
 
 ## Contents
 - [Installation](#installation)
@@ -67,7 +63,7 @@
 
 1. Clone this repository and navigate to into the codebase
 ```bash
-git clone https://github.com/tsb0601/MetaMorph
+git clone https://github.com/facebookresearch/MetaMorph
 cd MetaMorph
 ```
 
