@@ -1,3 +1,5 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+
 from typing import List, Optional, Tuple, Union
 
 from transformers import LogitsProcessor
@@ -235,8 +237,7 @@ class MetaMorphLlamaForCausalLM(LlamaForCausalLM, MetaMorphMetaForCausalLM):
             if config.normalize_vision:
                 self.normalize_vision = True
         except:
-            print("Not here")
-
+            pass
         try:
             vision_head = config.vision_head_type
         except:
@@ -355,7 +356,6 @@ class MetaMorphLlamaForCausalLM(LlamaForCausalLM, MetaMorphMetaForCausalLM):
             output_attentions=output_attentions,
             output_hidden_states=output_hidden_states,
             return_dict=return_dict,
-            # cache_position=cache_position,
         )
 
         hidden_states = outputs[0]
@@ -467,10 +467,6 @@ class MetaMorphLlamaForCausalLM(LlamaForCausalLM, MetaMorphMetaForCausalLM):
                 
 
 
-
-                ############################################
-                ### Need to set ratio here, currently 1:1 ##
-                ############################################
                 if self.use_vision_ar:
                     
                     if loss_image_ar.item() != 0:
@@ -553,8 +549,6 @@ class MetaMorphLlamaForCausalLM(LlamaForCausalLM, MetaMorphMetaForCausalLM):
                 in_image_mode = True
                 generated_ids_list.append(next_token.item())
                 inputs_embeds = torch.cat((inputs_embeds, next_token_embed), dim=1)
-
-            
 
 
             elif (in_image_mode) and (total_image_tokens<num_image_tokens):

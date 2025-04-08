@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+
+
 ########### DO NOT CHANGE ###########
 ########### USE THIS FOR BOTH ###########
 PROMPT_VERSION=llama3
@@ -17,7 +20,7 @@ deepspeed metamorph/train/train_mem.py \
     --mm_projector_type mlp2x_gelu \
     --tune_mm_mlp_adapter True \
     --normalize_vision True \
-    --mm_vision_select_layer -2 \
+    --mm_vision_select_layer -1 \
     --mm_use_im_start_end True \
     --mm_use_im_patch_token False \
     --image_token_reduction 'interpolation' \

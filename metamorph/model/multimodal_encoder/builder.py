@@ -1,3 +1,5 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+
 import os
 from .siglip_encoder import SiglipVisionTower
 

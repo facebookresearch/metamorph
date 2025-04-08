@@ -1,3 +1,4 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
 
 from abc import ABC, abstractmethod
 
@@ -16,8 +17,6 @@ class MetaMorphMetaModel:
 
     def __init__(self, config, vision_delay_load=True):
         super(MetaMorphMetaModel, self).__init__(config)
-
-        print("Delay load is", vision_delay_load)
 
         if hasattr(config, "mm_vision_tower"):
             # Change from True to False for loading
@@ -348,7 +347,6 @@ class MetaMorphMetaForCausalLM(ABC):
 
         # Truncate sequences to max length as image embeddings can make the sequence longer
 
-        # print("Max length is:", tokenizer_model_max_length)
         if tokenizer_model_max_length is not None:
             new_input_embeds = [x[:tokenizer_model_max_length] for x in new_input_embeds]
             new_labels = [x[:tokenizer_model_max_length] for x in new_labels]

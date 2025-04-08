@@ -76,12 +76,7 @@ pip install -e .
 
 ## Model Weights and Play with MetaMorph
 
-To use the model weights, download them from Hugging Face:
-
-- [MetaMorph-8B](https://huggingface.co/MetaMorphOrg/MetaMorph-8B)
-- [Visualization](https://huggingface.co/MetaMorphOrg/Visualizer/tree/main)
-
-We wrote a more detailed usage document in  [`inference/DEMO.md`](inference/DEMO.md).
+We are still working to open-source the model weights if possible. Nonetheless We wrote a more detailed usage document in  [`inference/DEMO.md`](inference/DEMO.md).
 
 We provide a sample model loading and demo script in [`inference/demo.py`](inferece/inference.py). 
 
@@ -110,7 +105,7 @@ MetaMorph mostly uses publicly available datasets for training:
 
 ### Visual Generation Data 
 - Image-text pairs curated through the MetaCLIP pipeline [Xu et al., 2024]
-  - Note: MetaCLIP data is not publicly available, but you can substitute with other public image-text pair datasets such as:
+  - Note: MetaCLIP data is not publicly available, but you can substitute with other public image-text pair datasets or text-to-image datasets such as:
     - CC12M (Conceptual 12M)
     - LAION
     - COYO
@@ -179,9 +174,6 @@ The hyperparameters for both pretraining and fine-tuning stages are detailed bel
 |--------------------|----------------------:|------------------:|-----------:|---------------:|
 | LLaMA-3.1 8B       | 768                  | 4.9e-5            | 1          | 4096           |
 
-Pretrained adapters using Cambrian-Adapter Data (excluding LAION-related data) are available at:  
-[MetaMorph Adapter on Hugging Face](https://huggingface.co/MetaMorphOrg/MetaMorph_Adapter_64Tokens)  
-You can download and directly use them for your experiments.
 
 #### 2. Instruction Tuning
 
@@ -248,14 +240,27 @@ Here are some questions we received from colleagues and friends, along with thei
 
 **A:** No, video datasets are not strictly required. They are used to showcase the model’s capabilities. You can start with image-text pairs and ImageQA data, which should suffice for initial training.
 
+---
+
+**Q: Would you open source model weights?**
+
+**A:** Unfortunately we also don't have an answer here. We are working towards it :)
+
 
 ## Citation
 
 If you find MetaMorph useful for your research and applications, please cite using this BibTeX:
 ```bibtex
-@misc{
+@article{tong2024metamorph,
+  title={Metamorph: Multimodal understanding and generation via instruction tuning},
+  author={Tong, Shengbang and Fan, David and Zhu, Jiachen and Xiong, Yunyang and Chen, Xinlei and Sinha, Koustuv and Rabbat, Michael and LeCun, Yann and Xie, Saining and Liu, Zhuang},
+  journal={arXiv preprint arXiv:2412.14164},
+  year={2024}
 }
 ```
+
+## License
+The majority of MetaMorph is licensed under CC-BY-NC, however portions of the project are available under separate license terms: Cambrian-1 and LLaVA are licensed under the Apache 2.0 license.
 
 ## Acknowledgement
 
@@ -268,6 +273,7 @@ If you find MetaMorph useful for your research and applications, please cite usi
 ## Related Projects
 - [Eyes Wide Shut? Exploring the Visual Shortcomings of Multimodal LLMs](https://tsb0601.github.io/mmvp_blog/)
 - [Cambrian-1: A Fully Open, Vision-Centric Exploration of Multimodal LLMs](https://cambrian-mllm.github.io/)
+
 
 
 

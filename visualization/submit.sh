@@ -1,5 +1,6 @@
 #!/bin/bash
-# grid_search_job.sh
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+
 #SBATCH -A your_account                    # Account name
 #SBATCH -q your_qos                                 # Quality of Service (QoS) or queue
 #SBATCH --output=./log/visualization/%j.out
