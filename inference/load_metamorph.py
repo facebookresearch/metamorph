@@ -17,7 +17,7 @@ import torch
 import os
 
 def load_metamorph_model(
-    model_path: str = "MetaMorphOrg/MetaMorph-8B",
+    model_path: str = None,
     model_base: str = None,
     device: str = "cuda",
     dtype: torch.dtype = torch.float16
@@ -60,9 +60,10 @@ def load_metamorph_model(
 
 if __name__ == "__main__":
     # Example usage
+
     tokenizer, model, image_processor, context_len = load_metamorph_model()
     
     print(f"Model info:")
-    print(f"- Model name: {get_model_name_from_path('MetaMorphOrg/MetaMorph-8B')}")
+    print(f"- Model name: {get_model_name_from_path('PATH-TO-MetaMorph Model')}")
     print(f"- Context length: {context_len}")
     print(f"- Model device: {model.device}")
