@@ -1,0 +1,8 @@
+log/
+wandb/
+checkpoints/
+visualization/**/*
+!visualization/*.*
+*.egg-info/
+*.pyc
+__pycache__/
