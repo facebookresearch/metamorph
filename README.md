@@ -1,6 +1,6 @@
 <div align="center">
 
-#   *MetaMorph*:<br>Multimodal Understanding andGeneration via Instruction Tuning
+#   *MetaMorph*:<br>Multimodal Understanding and Generation via Instruction Tuning
 
 
 <p>
